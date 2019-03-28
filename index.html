@@ -1,0 +1,255 @@
+<!--
+ File Name: index.html
+Template for General purpose html5 page with JQuery Mobile
+
+ Revision History:
+        Gyeonglim Seo, 2019-02-06 : Created
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" charset="UTF-8">
+        <title>GS Feedback A2</title>
+        <!--jQuery-->
+        <script src="js/lib/jquery-2.1.4.js"></script>
+        <!--jQuery mobile-->
+        <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+        <!--jQuery validation-->
+        <script src="js/lib/jquery.validate.js"></script>
+        <!--jQuery mobile css-->
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
+        <link rel="stylesheet" type="text/css" href="css/gsmystyle.css">
+
+        <!--my scripts-->
+        <script src="js/gsDatabase.js"></script>
+        <script src="js/gsfeedbackDAL.js"></script>
+        <script src="js/gsGlobal.js"></script>
+        <script src="js/gsUtil.js"></script>
+        <script src="js/gsFacade.js"></script>
+        
+    </head>
+    <body>
+        <!-- Home Page-->
+        <div id="gsHomePage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>GS Feedback A2</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#gsHomePage" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
+                        <li><a href="#gsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#gsVeiwFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#gsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <h1>Gyeonglim Seo's Feedback A2 App</h1>
+                <p>Welcome to the Gyeonlim Seo's Feedback A2 app. A prototype designed for mobile programming class.
+                    This is the first iteration of the app to keep track of different places you visited along with your reviews.</p>
+                <p align="center"><img src="img/GS-icon.png" alt="GS-icon" width="200"></p>
+                <p>Please feel free to contact me if you have any suggestions!</p>
+                <a href="" data-role="button" data-icon="plus">Call: 226.792.0135</a>
+                <a href="" data-role="button" data-icon="plus">gseo5840@conestogac.on.ca</a>
+                Website:
+                <a href="" data-role="button" data-icon="plus">Conestoga College</a>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1>&copy; 2019 Gyeonglim Seo</h1>
+            </footer>
+        </div>
+
+        <!-- Add feedback page -->
+        <div id="gsAddFeedbackPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Add a Feedback</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#gsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#gsAddFeedbackPage" data-icon="plus" class="ui-btn-active ui-state-persist">Add</a></li>
+                        <li><a href="#gsVeiwFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#gsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="gsFrmAddReview" name="gsFrmAddReview">
+                    <label for="gsBusinessNameAdd">Business Name:</label>
+                    <input type="text" name="gsBusinessNameAdd" id="gsBusinessNameAdd">
+
+                    <label for="gsTypeAdd">Type:</label>
+                    <select name="gsTypeAdd" id="gsTypeAdd">
+                        <option value="Others" selected>Others</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Canadian">Canadian</option>
+                    </select>
+
+                    <label for="gsReviewerEmailAdd">Reviewer Email:</label>
+                    <input type="text" name="gsReviewerEmailAdd" id="gsReviewerEmailAdd">
+
+                    <label for="gsReviewerCommentAdd">Reviewer Comments:</label>
+                    <textarea name="gsReviewerCommentAdd" id="gsReviewerCommentAdd" cols="30" rows="10"></textarea>
+
+                    <label for="gsReviewDateAdd">Review Date:</label>
+                    <input type="date" name="gsReviewDateAdd" id="gsReviewDateAdd" data-clear-btn="true">
+
+                    <label for="gsCheckRatingAdd">Do you want to your ratings?</label>
+                    <input type="checkbox" name="gsCheckRatingAdd" id="gsCheckRatingAdd" data-iconpos="left">
+
+                    <div id="gsRatingsAdd">
+                        <label for="gsFoodQualityAdd">Food Quality(0-5):</label>
+                        <input type="number" name="gsFoodQualityAdd" id="gsFoodQualityAdd" value="0">
+
+                        <label for="gsServiceAdd">Service(0-5):</label>
+                        <input type="number" name="gsServiceAdd" id="gsServiceAdd" value="0">
+
+                        <label for="gsValueAdd">Value(0-5):</label>
+                        <input type="number" name="gsValueAdd" id="gsValueAdd" value="0">
+
+                        <label for="gsOverallRatingsAdd">Overall Ratings (1-100):</label>
+                        <input type="text" name="gsOverallRatingsAdd" id="gsOverallRatingsAdd" disabled="disabled">
+                    </div>
+
+                    <button type="button" id="gsBtnSave" name="gsBtnSave"
+                            style="background-color: #22aadd; color: white; width: 80px" >
+                        Save</button>
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1>&copy; 2019 Gyeonglim Seo</h1>
+            </footer>
+        </div>
+
+        <!-- View feedback page-->
+        <div id="gsVeiwFeedbackPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>List of Reviews</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#gsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#gsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#gsVeiwFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist">Reviews</a></li>
+                        <li><a href="#gsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <ul id="gsFeedbackList" data-role="listview" data-inset="true" data-icon="">
+                    <li>
+                        <a href="#gsEditFeedbackPage">
+                            <h2>Business Name: Pizza Pizza</h2>
+                            <p>Reviewer Email: gseo@gmail.com <br>
+                            Comments: Terrible Pizza! <br>
+                                Overall Rating: 40%</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#gsEditFeedbackPage">
+                            <h2>Business Name: Burger King</h2>
+                            <p>Reviewer Email: dba@gmail.com <br>
+                            Comments: Nice Burger! <br>
+                                Overall Rating: 90%</p>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1>&copy; 2019 Gyeonglim Seo</h1>
+            </footer>
+        </div>
+
+        <!-- Edit feedback page-->
+        <div id="gsEditFeedbackPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Modify Feedback</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#gsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#gsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#gsVeiwFeedbackPage" data-icon="grid" class="ui-btn-active ui-state-persist">Reviews</a></li>
+                        <li><a href="#gsSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="gsFrmModifyReview" name="gsFrmModifyReview">
+                    <label for="gsBusinessNameModify">Business Name:</label>
+                    <input type="text" name="gsBusinessNameModify" id="gsBusinessNameModify" value="Pizza Pizza">
+
+                    <label for="gsTypeModify">Type:</label>
+                    <select name="gsTypeAdd" id="gsTypeModify">
+                        <option value="Others" selected>Others</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Canadian">Canadian</option>
+                    </select>
+
+                    <label for="gsReviewerEmailModify">Reviewer Email:</label>
+                    <input type="text" name="gsReviewerEmailModify" id="gsReviewerEmailModify" value="gseo@gmail.com">
+
+
+                    <label for="gsReviewerCommentModify">Reviewer Comments:</label>
+                    <textarea name="gsReviewerCommentModify" id="gsReviewerCommentModify" cols="30" rows="10" style="text-align: left">Terrible Pizza!</textarea>
+
+                    <label for="gsCheckRatingModify">Do you want to your ratings?</label>
+                    <input type="checkbox" name="gsCheckRatingModify" id="gsCheckRatingModify" data-iconpos="left">
+
+                    <div id="gsRatingsModify">
+                        <label for="gsFoodQualityModify">Food Quality(0-5):</label>
+                        <input type="number" name="gsFoodQualityModify" id="gsFoodQualityModify" value="0">
+
+                        <label for="gsServiceModify">Service(0-5):</label>
+                        <input type="number" name="gsServiceModify" id="gsServiceModify" value="0">
+
+                        <label for="gsValueModify">Value(0-5):</label>
+                        <input type="number" name="gsValueModify" id="gsValueModify" value="0">
+
+                        <label for="gsOverallRatingsModify">Overall Ratings (1-100):</label>
+                        <input type="text" name="gsOverallRatingsModify" id="gsOverallRatingsModify" disabled="disabled">
+                    </div>
+
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <button type="button" id="gsBtnCancel" name="gsBtnCancel"
+                                style="background-color: yellow; color: black; width: 60px" >
+                            Cancel
+                        </button>
+                        <button type="button" id="gsBtnDelete" name="gsBtnDelete"
+                                style="background-color: black; color: white; width: 60px" >
+                            Delete
+                        </button>
+                        <button type="button" id="gsBtnUpdate" name="gsBtnUpdate"
+                                style="background-color: #22aadd; color: white; width: 60px" >
+                            Update
+                        </button>
+                    </fieldset>
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1>&copy; 2019 Gyeonglim Seo</h1>
+            </footer>
+        </div>
+
+        <!--Settings page-->
+        <div id="gsSettingsPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Settings</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#gsHomePage" data-icon="home" data-theme="a">Home</a></li>
+                        <li><a href="#gsAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#gsVeiwFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#gsSettingsPage" data-icon="gear" class="ui-btn-active ui-state-persist">Settings</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <label for="gsDefaultReviewerEmail"></label>
+                <input type="text" id="gsDefaultReviewerEmail" name="gsDefaultReviewerEmail">
+
+                <a href="#" data-theme="b" data-role="button" id="gsBtnSaveDefaults" name="gsBtnSaveDefaults" class="ui-btn-active">Save Defaults</a>
+                <a href="#" data-theme="b" data-role="button" id="gsBtnClearDatabase" name="gsBtnClearDatabase">Clear Database</a>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1>&copy; 2019 Gyeonglim Seo</h1>
+            </footer>
+        </div>
+    </body>
+</html>
