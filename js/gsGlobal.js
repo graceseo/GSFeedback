@@ -88,7 +88,7 @@ function initDB() {
         }
     }
     catch(e){
-
+        console.error("Error: (Fatal) error in initDB(). Can not proceed.");
     }
 }
 
