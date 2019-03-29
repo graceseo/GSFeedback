@@ -16,6 +16,18 @@ function getOverallRating(quality,service,value) {
 }
 
 /**
+ * Save the default reviewer email to local storage
+ */
+function gsAddToStorage(){
+    if (localStorage.getItem("DefaultEmail"))
+    {
+        localStorage.removeItem("DefaultEmail");
+    }
+    localStorage.setItem("DefaultEmail", $("#gsDefaultReviewerEmail").val());
+    alert("Default reviewer email saved");
+}
+
+/**
  * Check validation for Adding a review
  * @returns {*|jQuery|boolean}
  */
@@ -74,7 +86,7 @@ function gsDoValidate_gsFrmAddReview() {
                 max:"Value must be 0-5"
             }
         }
-    })
+    });
 
     return form.valid();
 }
@@ -138,21 +150,9 @@ function gsDoValidate_gsFrmModifyReview() {
                 max:"Value must be 0-5"
             }
         }
-    })
+    });
 
     return form.valid();
-}
-
-/**
- * Save the default reviewer email to local storage
- */
-function gsAddToStorage(){
-    if (localStorage.getItem("DefaultEmail"))
-    {
-        localStorage.removeItem("DefaultEmail");
-    }
-    localStorage.setItem("DefaultEmail", $("#gsDefaultReviewerEmail").val());
-    alert("Default reviewer email saved");
 }
 
 jQuery.validator.addMethod("emailcheck",

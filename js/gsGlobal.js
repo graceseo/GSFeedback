@@ -37,7 +37,7 @@ function gsValueModify_change() {
 }
 
 function gsBtnSave_click() {
-    gsAddReview();
+    gsAddFeedback();
 }
 
 function gsBtnUpdate_click() {
@@ -47,13 +47,18 @@ function gsBtnUpdate_click() {
 function gsBtnSaveDefaults_click() {
     gsSaveDefaultsReviewerEmail();
 }
-
-function gsFrmAddReview_show() {
-    $("#gsRatingsAdd").hide();
+function gsEditFeedbackPage_show() {
+    $("#gsRatingsModify").hide();
 }
 
-function gsFrmModifyReview_show() {
-    $("#gsRatingsModify").hide();
+function gsBtnClearDatabase_click() {
+    gsClearDatabase();
+}
+
+function gsAddFeedbackPage_show() {
+    $("#gsRatingsAdd").hide();
+    gsLoadDefaultEmail();
+    gsUpdateTypesDropdown();
 }
 
 function init() {
@@ -72,8 +77,10 @@ function init() {
     $("#gsBtnUpdate").on("click", gsBtnUpdate_click);
 
     $("#gsBtnSaveDefaults").on("click", gsBtnSaveDefaults_click);
-    $("#gsFrmAddReview").on("pageshow", gsFrmAddReview_show);
-    $("#gsFrmModifyReview").on("pageshow", gsFrmModifyReview_show);
+    $("#gsBtnClearDatabase").on("click", gsBtnClearDatabase_click);
+
+    $("#gsAddFeedbackPage").on("pageshow", gsAddFeedbackPage_show);
+    $("#gsEditFeedbackPage").on("pageshow", gsEditFeedbackPage_show);
 }
 
 function initDB() {

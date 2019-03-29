@@ -51,15 +51,6 @@ function gsCalculateRatingModify() {
     $("#gsOverallRatingsModify").val(overallRating+"%");
 }
 
-function gsAddReview() {
-
-    if(gsDoValidate_gsFrmAddReview()){
-        console.info("Review Added successfully");
-    }else{
-        console.error("Adding Review failed");
-    }
-}
-
 function gsModifyReview() {
     if(gsDoValidate_gsFrmModifyReview()){
         console.info("Review Modified successfully");
@@ -70,4 +61,76 @@ function gsModifyReview() {
 
 function gsSaveDefaultsReviewerEmail(){
     gsAddToStorage();
+}
+
+function gsClearDatabase() {
+    var result=confirm("Really want to clear database?");
+    if(result){
+        try{
+            gsDropTables();
+            alert("Database Cleared!");
+        }catch(e){
+            alert(e);
+        }
+    }
+}
+
+function gsLoadDefaultEmail() {
+    var defaultEmail=localStorage.getItem("DefaultEmail");
+    $("#gsReviewerEmailAdd").val(defaultEmail);
+}
+
+function gsUpdateTypesDropdown() {
+    var options = [];
+
+    function callback(tx, results) {
+        var typeAppend = $("#gsTypeAdd");
+        typeAppend.empty();
+
+
+        for (var i = 0; i < results.rows.length; i++) {
+            var row = results.rows[i];
+            var selected="";
+            if(row['name']==="Others"){
+                selected="selected";
+            }
+            var htmlCode ="<option value="+row['id']+" "+selected+">"+row['name']+"</option>";
+            typeAppend.append(htmlCode);
+        }
+    }
+    Type.selectAll(options, callback);
+}
+
+function gsAddFeedback() {
+    //1.test validation
+    if(gsDoValidate_gsFrmAddReview()){
+        console.info("Validation is successful");
+        //2. if validation is successful then fetch the info from input controls
+        var businessName = $("#gsBusinessNameAdd").val();
+        var typeId=$("#gsTypeAdd").val();
+        var reviewerEmail=$("#gsReviewerEmailAdd").val();
+        var reviewerComments=$("#gsReviewerCommentAdd").val();
+        var reviewDate=$("#gsReviewDateAdd").val();
+        var hasRating=$("#gsCheckRatingAdd").prop("checked");
+        var rating1=$("#gsFoodQualityAdd").val();
+        var rating2=$("#gsServiceAdd").val();
+        var rating3=$("#gsValueAdd").val();
+        var opt;
+
+        //3. only your ratings' checkbox is checked, rating1/rating2/rating3 is included
+        if(hasRating===1){
+            opt = [businessName, typeId, reviewerEmail,reviewerComments,reviewDate,hasRating,rating1,rating2,rating3];
+        }else{
+            opt=[businessName, typeId, reviewerEmail, reviewerComments,reviewDate,hasRating,null,null,null];
+        }
+        function success() {
+            console.info("Record inserted successfully");
+            alert("New Feedback Added");
+        }
+        //4. insert into table (by calling insert DAL function and supplying the inputs
+        Review.insert(opt, success);
+
+    }else{
+        console.error("Adding Review failed");
+    }
 }
