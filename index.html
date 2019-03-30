@@ -78,9 +78,6 @@ Template for General purpose html5 page with JQuery Mobile
 
                     <label for="gsTypeAdd">Type:</label>
                     <select name="gsTypeAdd" id="gsTypeAdd">
-                        <option value="Others" selected>Others</option>
-                        <option value="Asian">Asian</option>
-                        <option value="Canadian">Canadian</option>
                     </select>
 
                     <label for="gsReviewerEmailAdd">Reviewer Email:</label>
@@ -134,22 +131,6 @@ Template for General purpose html5 page with JQuery Mobile
             </header>
             <section data-role="content">
                 <ul id="gsFeedbackList" data-role="listview" data-inset="true" data-icon="">
-                    <li>
-                        <a href="#gsEditFeedbackPage">
-                            <h2>Business Name: Pizza Pizza</h2>
-                            <p>Reviewer Email: gseo@gmail.com <br>
-                            Comments: Terrible Pizza! <br>
-                                Overall Rating: 40%</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#gsEditFeedbackPage">
-                            <h2>Business Name: Burger King</h2>
-                            <p>Reviewer Email: dba@gmail.com <br>
-                            Comments: Nice Burger! <br>
-                                Overall Rating: 90%</p>
-                        </a>
-                    </li>
                 </ul>
             </section>
             <footer data-role="footer" data-theme="b" data-position="fixed">
@@ -177,17 +158,16 @@ Template for General purpose html5 page with JQuery Mobile
 
                     <label for="gsTypeModify">Type:</label>
                     <select name="gsTypeModify" id="gsTypeModify">
-                        <option value="Others" selected>Others</option>
-                        <option value="Asian">Asian</option>
-                        <option value="Canadian">Canadian</option>
                     </select>
 
                     <label for="gsReviewerEmailModify">Reviewer Email:</label>
                     <input type="text" name="gsReviewerEmailModify" id="gsReviewerEmailModify" value="gseo@gmail.com">
 
-
                     <label for="gsReviewerCommentModify">Reviewer Comments:</label>
                     <textarea name="gsReviewerCommentModify" id="gsReviewerCommentModify" cols="30" rows="10" style="text-align: left">Terrible Pizza!</textarea>
+
+                    <label for="gsReviewDateModify">Review Date:</label>
+                    <input type="date" name="gsReviewDateModify" id="gsReviewDateModify" data-clear-btn="true">
 
                     <label for="gsCheckRatingModify">Do you want to your ratings?</label>
                     <input type="checkbox" name="gsCheckRatingModify" id="gsCheckRatingModify" data-iconpos="left">
@@ -207,15 +187,15 @@ Template for General purpose html5 page with JQuery Mobile
                     </div>
 
                     <fieldset data-role="controlgroup" data-type="horizontal">
-                        <button type="button" id="gsBtnCancel" name="gsBtnCancel"
+                        <button type="button" id="gsBtnCancelModify" name="gsBtnCancelModify"
                                 style="background-color: yellow; color: black; width: 60px" >
                             Cancel
                         </button>
-                        <button type="button" id="gsBtnDelete" name="gsBtnDelete"
+                        <button type="button" id="gsBtnDeleteModify" name="gsBtnDeleteModify"
                                 style="background-color: black; color: white; width: 60px" >
                             Delete
                         </button>
-                        <button type="button" id="gsBtnUpdate" name="gsBtnUpdate"
+                        <button type="button" id="gsBtnUpdateModify" name="gsBtnUpdateModify"
                                 style="background-color: #22aadd; color: white; width: 60px" >
                             Update
                         </button>

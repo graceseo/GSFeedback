@@ -42,7 +42,8 @@ function gsDoValidate_gsFrmAddReview() {
             },
             gsReviewerEmailAdd:{
                 required: true,
-                emailcheck:true
+                conestogaEmailcheck:true,
+                emailCheck:true
             },
             gsReviewDateAdd:{
                 required:true
@@ -68,7 +69,8 @@ function gsDoValidate_gsFrmAddReview() {
             },
             gsReviewerEmailAdd:{
                 required: "Email is required",
-                emailcheck:"Email must be a conestoga email"
+                conestogaEmailcheck:"Email must be a conestoga email",
+                emailCheck: "Email is not valid"
             },
             gsReviewDateAdd:{
                 required:"Review data is required"
@@ -106,7 +108,8 @@ function gsDoValidate_gsFrmModifyReview() {
             },
             gsReviewerEmailModify:{
                 required: true,
-                emailcheck:true
+                conestogaEmailcheck:true,
+                emailCheck:true
             },
             gsReviewDateModify:{
                 required:true
@@ -132,7 +135,8 @@ function gsDoValidate_gsFrmModifyReview() {
             },
             gsReviewerEmailModify:{
                 required: "Email is required",
-                emailcheck:"Email must be a conestoga email"
+                conestogaEmailcheck:"Email must be a conestoga email",
+                emailCheck: "Email is not valid"
             },
             gsReviewDateModify:{
                 required:"Review data is required"
@@ -155,9 +159,16 @@ function gsDoValidate_gsFrmModifyReview() {
     return form.valid();
 }
 
-jQuery.validator.addMethod("emailcheck",
+jQuery.validator.addMethod("conestogaEmailcheck",
     function (value, element) {
         var regex=/^.+conestogac.on.ca$/;
+
+        return this.optional(element) || regex.test(value);
+    }, "Custom email checker");
+
+jQuery.validator.addMethod("emailCheck",
+    function (value, element) {
+        var regex=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
         return this.optional(element) || regex.test(value);
     }, "Custom email checker");
